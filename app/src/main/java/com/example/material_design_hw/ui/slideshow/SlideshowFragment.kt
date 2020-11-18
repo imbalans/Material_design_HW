@@ -1,31 +1,19 @@
 package com.example.material_design_hw.ui.slideshow
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.Button
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import com.example.material_design_hw.R
 
-class SlideshowFragment : Fragment() {
+class SlideshowFragment : Fragment(R.layout.fragment_slideshow) {
 
-    private lateinit var slideshowViewModel: SlideshowViewModel
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-    override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
-    ): View? {
-        slideshowViewModel =
-                ViewModelProviders.of(this).get(SlideshowViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_slideshow, container, false)
-        val textView: TextView = root.findViewById(R.id.text_slideshow)
-        slideshowViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
-        return root
+        view.findViewById<Button>(R.id.button_newfragment).setOnClickListener {
+            findNavController().navigate(R.id.action_nav_slideshow_to_newFragment)
+        }
     }
 }
